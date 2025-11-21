@@ -1,54 +1,86 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Start running MD simulations in minutes"
 ---
 
-## Get started in three steps
+## Get started in four steps
 
-Get your documentation site running locally and make your first customization.
+Get your first MD simulation running with your customized settings and parameters.
 
-### Step 1: Set up your local environment
+### Step 1: Submit your molecular and simulation files
 
 <AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
+  <Accordion icon="copy" title="Request a secure upload-url">
+    In order to upload your files, you will first need to request a secure upload URL from us. This URL will give you temporary access to make an upload and has a TTL of 60 minutes.
+
+    Through this URL, you will be able to submit molecular data (e.g., .pdb, .sdf) and custom force field files (e.g., .xml).
   </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
+  <Accordion icon="rectangle-terminal" title="Register the file to your account">
+    Once your file has been successfully uploaded through the secure upload-url, you'll need to register that file with your account to begin using it in your MD simulations.
+    Here, you'll use the file_id obtained from the previous step and assign your file a new name.
     
-    <Tip>Your preview updates automatically as you edit files.</Tip>
+    <Tip>Your registered file shows up automatically in your account upon success.</Tip>
   </Accordion>
 </AccordionGroup>
 
-### Step 2: Deploy your changes
+### Step 2: Build your simulation box
 
 <AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
+  <Accordion icon="github" title="Determine your system configuration">
+    Before we run an MD simulation, make sure to build the system you'd like to run with first. If you've already built your system before, feel free to skip this step.
+
+    Select the molecules to include in the system. This includes any previously uploaded custom molecule files, or a PDB ID.
+
+    Review the available parameters for customization during the system build. These include force fields, water models, membrane embeddings, and more!
 </Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+<Accordion icon="palette" title="Submit the system build ">
+    Now, let's hit submit and wait just a few moments for your customized system to build!
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+    1. Your submitted system build will show up instantly in the System Board.
+    2. Make sure to refresh your board periodically to get the latest status updates on your system build.
+    3. See your system instantly, once it's built, by viewing its Details.
+    4. Make sure to refresh your System View periodically to ge the latest updates on your system build.
+    5. Once the build has completed, you'll now be able to submit MD simulations!
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
+    <Tip>Check the simulation logs to see exactly what took place during the system build!</Tip>
   </Accordion>
 </AccordionGroup>
 
-### Step 3: Go live
+### Step 3: Submit your MD simulation
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
+<AccordionGroup>
+  <Accordion icon="rocket" title="Determine your simulation configuration">
+    1. Commit and push your changes.
+    2. Your docs will update and be live in moments!
+  </Accordion>
+  <Accordion icon="rocket" title="Submit the simulation">
+    Now let's hit submit and wait just a few moments for your MD simulation to begin!
+
+    1. Your submitted simulation will show up instantly in the Job Board.
+    2. Make sure to refresh your board periodically to get the latest status updates on your simulation.
+    3. See your simulation results instantly, as it progresses, by viewing its Details.
+    4. Make sure to refresh your Simulation View periodically to ge the latest updates on your simulation.
+    5. Once the simulation has completed, you'll now be able to perform analysis on the resulting trajectory!
+  </Accordion>
+</AccordionGroup>
+
+### Step 4: Run your analysis
+
+<Accordion icon="rocket" title="Dive Into Your Simulation Trajectory">
+  Once your simulation is complete, you can analyze the trajectory to understand its exact molecular interactions.
+  
+  Use Amber masking syntax to select residues, atoms, or chains and run analyses tailored to your needs.
+</Accordion>
+
+
+### Step 5: Download your results
+
+<Accordion icon="rocket" title="Get the Zipped Output Bundle">
+  At any point once your simulation has completed, you can download the full set of simulation results in a zipped output bundle.
+
+  This bundle will contain all intermediate structures and trajectories, as well as the final simulated production trajectory at full fidelity.
+  All logs, including warnings and error outputs, are included in the bundle.
+  You can use these outputs to simply visualize the simulation or even apply your own custom trajectory analysis!
 </Accordion>
 
 ## Next steps
