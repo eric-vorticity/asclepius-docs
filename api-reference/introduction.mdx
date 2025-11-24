@@ -1,33 +1,30 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Overview of the Asclepius API'
 ---
 
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  This section contains the full Asclepius API documentation.  
+  If you’re not planning to interact with Asclepius programmatically, you can safely ignore or remove this section.
 </Note>
 
 ## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+The Asclepius API allows developers and advanced users to interact with the Asclepius engine programmatically.  
+Using these endpoints, you can automate workflows, integrate Asclepius into your own tools, or build entirely new applications on top of the platform.
+
+Documentation in this section is generated from the official Asclepius API specification.
 
 <Card
-  title="Asclepius: API Endpoints"
+  title="Asclepius: API Specification"
   icon="leaf"
-  href="/home/erichan/Documents/asclepius-docs/api-reference/openapi.json"
+  href="/api-reference/openapi.json"
 >
-  View the OpenAPI specification file
+  View the API specification
 </Card>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+Access to the Asclepius API requires an API key.  
+You can generate and manage your keys within the Asclepius portal.  
+Include your key in all requests to authenticate and use the API.

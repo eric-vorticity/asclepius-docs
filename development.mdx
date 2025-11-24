@@ -1,78 +1,188 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: 'Examples'
+description: 'View example endpoint calls'
 ---
 
 <Info>
   **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
+  - A registered Asclepius account
+  - A generated API key associated with the account
 </Info>
 
 Follow these steps to install and run Mintlify on your operating system.
 
 <Steps>
-<Step title="Install the Mintlify CLI">
+<Step title="Request a secure upload URL">
 
 ```bash
-npm i -g mint
+curl --request GET \
+  --url 'https://98i2es6mi4.execute-api.us-west-2.amazonaws.com/prod/submit/upload-url?filetype=pdb' \
+  --header 'x-api-key: <api-key>'
 ```
 </Step>
 
-<Step title="Preview locally">
+<Step title="Upload your custom simulation files">
 
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
+Copy the secure upload link obtained in the previous step and run the following command:
 
 ```bash
-mint dev
+curl --upload-file ./myfile.pdb \
+     -H "Content-Type: chemical/x-pdb" \
+     "https://your-presigned-url..."
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+A 3d render of your molecules and preview of your files will be available through the [Asclepius UI](https://asclepius.vorticity.xyz).
+
+</Step>
+
+<Step title="Register your new files">
+
+Copy the secure upload link obtained in the previous step and run the following command:
+
+```bash
+curl --request POST \
+  --url https://98i2es6mi4.execute-api.us-west-2.amazonaws.com/prod/submit/file/ \
+  --header 'Content-Type: application/json' \
+  --header 'x-api-key: <api-key>' \
+  --data '{
+  "name": "<string>",
+  "type": "<string>",
+  "format": "<string>",
+  "file_id": "<string>"
+}'
+```
+
+A 3d render of your molecules and preview of your files will be available through the [Asclepius UI](https://asclepius.vorticity.xyz).
+
+</Step>
+
+<Step title="Build a system">
+
+Gather your system requirements including force fields, molecules, and environment before running the next command to build your system. 
+
+```bash
+curl --request POST \
+  --url https://98i2es6mi4.execute-api.us-west-2.amazonaws.com/prod/submit/system \
+  --header 'Content-Type: application/json' \
+  --header 'x-api-key: <api-key>' \
+  --data '{
+  "box_name": "<string>",
+  "box_shape": "<string>",
+  "chain_id": "<string>",
+  "concentration": 123,
+  "force_field": "<string>",
+  "ions": "<string>",
+  "keep_Hs": true,
+  "ligand_input_formats": [
+    "<string>"
+  ],
+  "ligand_residue_names": [
+    "<string>"
+  ],
+  "ligand_rotations": [
+    [
+      "<any>"
+    ]
+  ],
+  "ligand_translations": [
+    [
+      "<any>"
+    ]
+  ],
+  "ligands": [
+    "<string>"
+  ],
+  "membrane": "<string>",
+  "minimum_padding": 123,
+  "pH": 123,
+  "protein": "<string>",
+  "water_type": "<string>"
+}'
+```
+
+</Step>
+
+<Step title="Submit a simulation">
+
+Copy the secure upload link obtained in the previous step and run the following command:
+
+```bash
+curl --request POST \
+  --url https://98i2es6mi4.execute-api.us-west-2.amazonaws.com/prod/submit/job \
+  --header 'Content-Type: application/json' \
+  --header 'x-api-key: <api-key>' \
+  --data '{
+  "batch_index": 1,
+  "batch_name": "<string>",
+  "equilibration": [
+    {
+      "traj_freq": 1,
+      "time": 1,
+      "log_freq": 1,
+      "type": "<string>",
+      "restraint_force": 1,
+      "restraint_mask": "<string>"
+    }
+  ],
+  "production": {
+    "traj_freq": 1,
+    "time": 1,
+    "log_freq": 1,
+    "type": "<string>"
+  },
+  "temperature": 1,
+  "pressure": 1,
+  "surface_tension": 1,
+  "friction": 1,
+  "integration_timestep": 1,
+  "ewald_error_tolerance": 1,
+  "non_bonded_cutoff": 1,
+  "minimization_steps": 1,
+  "trajectory_output_format": "<string>"
+}'
+```
+
+</Step>
+
+<Step title="Analyze your trajectory">
+
+To run your own analysis on the trajectory that was calculated, run the following command:
+
+```bash
+curl --request POST \
+  --url https://98i2es6mi4.execute-api.us-west-2.amazonaws.com/prod/submit/analysis \
+  --header 'Content-Type: application/json' \
+  --header 'x-api-key: <api-key>' \
+  --data '{
+  "downsample_frames": 123,
+  "distance_masks": [
+    "<string>"
+  ],
+  "rmsd_masks": [
+    [
+      "<string>"
+    ]
+  ],
+  "rmsf_masks": [
+    "<string>"
+  ],
+  "hbond_angle": 123,
+  "hbond_distance": 123
+}'
+```
+
+</Step>
+
+<Step title="Download results">
+
+```bash
+curl --request GET \
+  --url https://98i2es6mi4.execute-api.us-west-2.amazonaws.com/prod/retrieve/job/{job_id} \
+  --header 'x-api-key: <api-key>'
+```
 
 </Step>
 </Steps>
-
-## Custom ports
-
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
-
-```bash
-mint dev --port 3333
-```
-
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
-
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
-
-## Mintlify versions
-
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
-
-```bash
-npm mint update
-```
-
-## Validating links
-
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
-
-```bash
-mint broken-links
-```
-
-## Deployment
-
-If the deployment is successful, you should see the following:
-
-<Frame>
-  <img src="/images/checks-passed.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />
-</Frame>
-
-## Code formatting
-
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
 
 ## Troubleshooting
 

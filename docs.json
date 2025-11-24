@@ -25,22 +25,6 @@
               "quickstart",
               "development"
             ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
           }
         ]
       },
@@ -70,9 +54,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Portal",
+          "href": "https://asclepius.vorticity.xyz/portal",
+          "icon": "rocket"
         },
         {
           "anchor": "Blog",
